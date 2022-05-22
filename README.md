@@ -33,3 +33,7 @@ There are a few tools available to help you debug failed tests on CI:
 - The `cypress-failed-log` plugin will display the Cypress commands of any failed test in the CI log. This can help provide context of what hapenned leading up to the test failure.
 - The result of the Cypress run is saved as an artifact in GitHub, you can find it on the summary page of the Action workflow. Inside the zip file you will find screenshots, videos, and logs of any failed tests.
 - If you suspect a test failure might be caused by a graphql api issue you can log every request & response by adding the command `cy.logApiRequests()` to a `Before()` block in your test. Note: this will make the logs very verbose.
+
+## Video recording of running tests
+https://user-images.githubusercontent.com/68429856/169706267-63ba7bb3-c958-405d-ac83-34c57bef4aa3.mp4
+
