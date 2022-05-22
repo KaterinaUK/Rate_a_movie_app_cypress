@@ -16,3 +16,14 @@ Given('I open the application', () => {
     .should('have.text', 'Update Movie')
     .click();
   });
+
+  When('I delete a random movie and verify success response', () => {
+    cy.request({
+        method: 'DELETE',
+        url: 'http://localhost:5001/api/movie/62879f74ee07a0f3d36eed6b',
+    }).then((Response) => {
+        expect(Response.body).has.property("success", true);
+        expect(Response.status).to.equal(200);
+        
+    })
+})

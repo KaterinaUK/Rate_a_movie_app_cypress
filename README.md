@@ -10,6 +10,7 @@ You will need:
 - Docker
 - The following repos cloned side-by-side with qa-code-challenge-0.1.0:
   - https://github.com/KaterinaUK/Rate_a_movie_app_cypress
+- run `npm install` on Project folder you are all set.
 
 ## Overview
 

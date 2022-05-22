@@ -29,4 +29,7 @@ export default (
   on('task', {
     failed: cypressFailedLog(),
   });
+  module.exports = (on, config) => {
+    require('cypress-mochawesome-reporter/plugin')(on);
+  };
 };
