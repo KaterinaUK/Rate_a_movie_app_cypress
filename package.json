@@ -1,0 +1,32 @@
+{
+  "name": "rate_a_movi_app_cypress",
+  "version": "1.0.0",
+  "description": "Automated tests for movie rating app using Cypress",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "keywords": [],
+  "author": "Katerina",
+  "license": "ISC",
+  "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^9.2.1",
+    "@cypress/webpack-preprocessor": "^5.11.1",
+    "@types/cypress-cucumber-preprocessor": "^4.0.1"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^8.2.1",
+    "@cypress/browserify-preprocessor": "^3.0.2",
+    "cypress": "^9.6.1",
+    "cypress-failed-log": "^2.9.5",
+    "typescript": "^4.6.4"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": [
+      "cypress/integration/common/**/*.{js,ts}",
+      "cypress/integration/[filepath].{js,ts}",
+      "cypress/integration/[filepath]/**/*.{js,ts}"
+    ]
+  }
+}
