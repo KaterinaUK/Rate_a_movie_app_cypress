@@ -1,0 +1,50 @@
+# This is a basic workflow to trigger the tests
+
+name: Cypress MovieApp e2e tests
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+# do not run tests if file README.md changes
+    paths-ignore:
+      - 'README.md'
+    # run tests for GitHub Pull requests. Test result is visible in the Pull Request page.
+  schedule:
+    # run tests Every hour, between 09:00 AM and 05:00 PM, Monday through Friday
+    - cron:  '0 09-17 * * 1-5'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+    # uses the Cypress github action
+      - name: Cypress.io
+        uses: cypress-io/github-action@v2.9.7
+        with:
+          record: true
+        env:
+        # pass the Dashboard record key as an environment variable
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # pass GitHub token to allow accurately detecting a build vs a re-run build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          googleClientId: ${{ secrets.CYPRESS_GOOGLECLIENTID }}
+          googleClientSecret: ${{ secrets.CYPRESS_GOOGLECLIENTSECRET }}
+          googleRefreshToken: ${{ secrets.CYPRESS_GOOGLEREFRESHTOKEN }}
+          username: ${{ secrets.CYPRESS_USERNAME  }}
+          password: ${{ secrets.CYPRESS_PASSWORD  }}
