@@ -6,6 +6,7 @@ How to run and develop the Cypress tests on your local machine.
 
 You will need:
 
+- Download movie app [here](https://radixdlt.github.io/qa-coding-challenge/qa-coding-challenge-0.1.0.zip)
 - Movie app running locally (see README.md) for setup instructions
 - Docker
 - The following repos cloned side-by-side with qa-code-challenge-0.1.0:

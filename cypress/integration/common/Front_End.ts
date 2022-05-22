@@ -1,7 +1,7 @@
-import { Before, And, When, Then, DataTable} from '@badeball/cypress-cucumber-preprocessor';
+import { Before, Given, And, When, Then, DataTable} from '@badeball/cypress-cucumber-preprocessor';
 // import {TableDefinition} from '@types/cypress-cucumber-preprocessor';
 import { beforeEach } from 'mocha';
-import { fieldsName } from './common/parameters';
+import { fieldsName } from './parameters';
 // import _ = require('cypress/types/lodash');
 var _ = require('lodash');
 const url = 'http://localhost:3000'
@@ -10,6 +10,23 @@ Before(() => {
  cy.visit(url)
  cy.log('this is start')
  });
+
+Given('I open the application', () => {
+  cy.contains('Simple Application');
+  cy.log.name
+},
+);
+And('I find a specific movie', () =>{
+  cy.get(':nth-child(1) > .rt-resizable-header-content').screenshot();
+  cy.get(':nth-child(2) > input').type('test1');
+  cy.get(':nth-child(1) > .rt-tr > :nth-child(6) > span > .sc-Axmtr').click();
+});
+Then('I will update the name', () => {
+  cy.get('[type="number"]').clear().type('7')
+  cy.get('.sc-fzoyAV')
+  .should('have.text', 'Update Movie')
+  .click();
+});
 
 And('I click on Create Movie button', () => {
   cy.get(':nth-child(2) > .nav-link').click();
@@ -46,7 +63,6 @@ When('I click on list movies button to perform a search', () =>{
   cy.get(':nth-child(1) > .nav-link').click();
   cy.wait(1);
 })
-
 
 When(/^I use data-driven approach$/, (table: DataTable) => {
     console.log("I provide below information - display it all");

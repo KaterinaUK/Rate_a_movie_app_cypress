@@ -1,6 +1,6 @@
 Feature: API automated testing
 # Test5
-  Scenario: GET a list and verify it
+  Scenario: GET the move list and verify it
   When I send a GET request and verify it
 
 # Test6
@@ -12,5 +12,5 @@ Feature: API automated testing
   When I send a POST request with valid data and verify it
 
 # Test8
-  Scenario: DELETE a random movie
-  When I delete a random movie and verify success response
+  Scenario: DELETE a movie
+  When I delete a movie and verify success response
