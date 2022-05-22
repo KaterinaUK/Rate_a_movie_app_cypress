@@ -9,7 +9,7 @@ You will need:
 - Movie app running locally (see README.md) for setup instructions
 - Docker
 - The following repos cloned side-by-side with qa-code-challenge-0.1.0:
-  - https://github.com/
+  - https://github.com/KaterinaUK/Rate_a_movie_app_cypress
 
 ## Overview
 
