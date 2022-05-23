@@ -23,7 +23,7 @@ Then('I will update the name', () => {
 });
 
 And('I click on Create Movie button', () => {
-  return cy.get(':nth-child(2) > .nav-link')
+  cy.get(':nth-child(2) > .nav-link')
         .click();
 },
 );

@@ -49,17 +49,17 @@ export class GlobalNavigation {
       }
     newMovieButton()
       {
-        return cy.get(':nth-child(2) > .nav-link')
-        .click();
+        return cy.get(':nth-child(2) > .nav-link').click();
       }
 
     listMoviesButton()
     {
       return cy.get(':nth-child(1) > .nav-link').click();
     }
+
     ratingTypeField()
     {
-      return cy.get('[type="number"]').clear().type('7')
+      return cy.get('[type="number"]')
     }
     ratingField()
     {
