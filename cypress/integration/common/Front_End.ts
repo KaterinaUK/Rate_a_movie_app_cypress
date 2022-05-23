@@ -1,8 +1,5 @@
 import { Before, Given, And, When, Then, DataTable} from '@badeball/cypress-cucumber-preprocessor';
-// import {TableDefinition} from '@types/cypress-cucumber-preprocessor';
-import { beforeEach } from 'mocha';
-import { fieldsName } from './parameters';
-// import _ = require('cypress/types/lodash');
+import GlobalNavigation from '../../support/POM/Front_End_app_page';
 var _ = require('lodash');
 const url = 'http://localhost:3000'
 
@@ -17,25 +14,23 @@ Given('I open the application', () => {
 },
 );
 And('I find a specific movie', () =>{
-  cy.get(':nth-child(1) > .rt-resizable-header-content').screenshot();
-  cy.get(':nth-child(2) > input').type('test1');
-  cy.get(':nth-child(1) > .rt-tr > :nth-child(6) > span > .sc-Axmtr').click();
+  GlobalNavigation.nameFieldType;
+  GlobalNavigation.getUpdateButton;
 });
 Then('I will update the name', () => {
-  cy.get('[type="number"]').clear().type('7')
-  cy.get('.sc-fzoyAV')
-  .should('have.text', 'Update Movie')
-  .click();
+  GlobalNavigation.ratingTypeField;
+  GlobalNavigation.clickUpdateButton;
 });
 
 And('I click on Create Movie button', () => {
-  cy.get(':nth-child(2) > .nav-link').click();
+  return cy.get(':nth-child(2) > .nav-link')
+        .click();
 },
 );
 When('I add a movie to the database', () => {
   cy.get('.sc-fzoLsD > :nth-child(3)').type('test1');
-  cy.get('[type="number"]').type('9');
-  cy.get('[value=""]').log("I will leave it empty");
+  cy.get('[type="number"]').clear().type('7');
+  GlobalNavigation.getTimeField;
   cy.get('.sc-fznyAO')
   .should('have.text', 'Add Movie')
   .click();
@@ -53,9 +48,7 @@ Then('this movie is saved to the database', () => {
   })
 
 Then('I cancel submission', () => {
-  cy.get('.sc-fznKkj')
-  .should('have.text', 'Cancel')
-  .click();
+  GlobalNavigation.cancelButton;
 },
 );
 

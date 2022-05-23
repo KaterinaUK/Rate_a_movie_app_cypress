@@ -2,6 +2,7 @@ Feature: API automated testing
 # Test5
   Scenario: GET the move list and verify it
   When I send a GET request and verify it
+  Then I store the data from the movie list
 
 # Test6
   Scenario: POST incorrect data and verify that movie is not created
