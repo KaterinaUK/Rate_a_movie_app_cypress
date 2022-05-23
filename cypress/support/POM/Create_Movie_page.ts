@@ -22,6 +22,12 @@ export class GlobalNavigation {
       .click();
     }
 
+    static clickAddButton()
+    {
+      return cy.get('.sc-fznyAO')
+      .should('have.text', 'Add Movie')
+      .click();
+    }
     cancelButton()
       {
         return cy.get('.sc-fznKkj').should('have.text', 'Cancel')
@@ -30,7 +36,8 @@ export class GlobalNavigation {
 
     static newMovieButton()
       {
-        return cy.get(':nth-child(2) > .nav-link').click();
+        return cy.get(':nth-child(2) > .nav-link')
+        .click();
       }
 
     listMoviesButton()

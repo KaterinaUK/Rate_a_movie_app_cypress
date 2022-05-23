@@ -32,9 +32,7 @@ When('I add a movie to the database', () => {
   cy.get('.sc-fzoLsD > :nth-child(3)').type('test1');
   cy.get('[type="number"]').clear().type('7');
   GlobalNavigation.getTimeField;
-  cy.get('.sc-fznyAO')
-  .should('have.text', 'Add Movie')
-  .click();
+  GlobalNavigation.clickAddButton;
   cy.on('window:alert', (txt) => {
     expect(txt).to.contains('Movie inserted successfully');
   });
@@ -66,7 +64,6 @@ When(/^I use data-driven approach$/, (table: DataTable) => {
     cy.get('.rt-tr > :nth-child(1) > input').type(row.ID);
     cy.get(':nth-child(2) > input').click().type(row.Name);
     GlobalNavigation.ratingField;
-    // cy.get(':nth-child(3) > input').click().type('9');
     })
 })
 
