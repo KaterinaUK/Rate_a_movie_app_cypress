@@ -1,69 +1,99 @@
+/// <reference types="Cypress" />
+
 import { Before, Given, And, When, Then, DataTable} from '@badeball/cypress-cucumber-preprocessor';
-import GlobalNavigation from '../../support/POM/Create_Movie_page';
-import Navigation from '../../support/POM/List_Movies_page';
+import { create } from 'cypress/types/lodash';
+import CreateMovie from '../../support/POM/Create_Movie_page';
+import ListMovies from '../../support/POM/List_Movies_page';
 var _ = require('lodash');
-const url = 'http://localhost:3000'
+const url = 'http://localhost:3000';
+
+const createMovie = new CreateMovie();
+const listMovies = new ListMovies();
 
 Before(() => {
  cy.visit(url)
  cy.log('this is start')
- });
+});
 
 Given('I open the application', () => {
   cy.contains('Simple Application');
   cy.log.name
-},
-);
-And('I find a specific movie', () =>{
-  Navigation.nameFieldType;
-  Navigation.getUpdateButton;
 });
+
+And('I find a specific movie', () =>{
+  listMovies.clickNameField()
+    .type('Interstellar')
+  listMovies.clickUpadateButton();
+});
+
 Then('I will update the name', () => {
-  GlobalNavigation.ratingTypeField;
-  GlobalNavigation.clickUpdateButton;
+  createMovie.getUpdateNameField()
+    .focus()
+    .clear();
+  createMovie.getClearUpdateNameField()  
+    .type('Casablanca');
+  createMovie.clickUpdateButton();
+  cy.on('window:alert', (txt) => {
+    expect(txt).to.contains('Movie updated successfully');   // verification step for checking that succcess message is displayed to user
+  })
 });
 
 And('I click on Create Movie button', () => {
-  cy.get(':nth-child(2) > .nav-link')
-        .click();
+  createMovie.clickCreateMovieButton();
 });
 
-When('I add a movie to the database', () => {
-  cy.get('.sc-fzoLsD > :nth-child(3)').type('test1');
-  cy.get('[type="number"]').clear().type('7');
-  GlobalNavigation.getTimeField;
-  GlobalNavigation.clickAddButton;
-  cy.on('window:alert', (txt) => {
-    expect(txt).to.contains('Movie inserted successfully');
-  });
-},
-);
-Then('this movie is saved to the database', () => {
-  cy.request('http://localhost:3000/movies/list').as('c')
-  cy.get('@c').should((response) => {
-   expect(response).to.have.property('headers')
-  },
-  );
+When(/^I add a movie to the database$/, (table: DataTable) => {
+    console.log("Start of data table test entering new movies to database");
+    var rows = table.hashes();
+    _.each(rows, function(row){
+    console.log(row.Time[1] + " " + row.Name + " " + row.Rating);
+    createMovie.getNameField()
+      .type(row.Name);
+    createMovie.getRatingField()
+      .type(row.Rating);
+    createMovie.getTimeField()  
+      .type(row.Time);
+    createMovie.clickAddButton();
+    cy.on('window:alert', (txt) => {
+      expect(txt).to.contains('Movie inserted successfully');   // verification step for checking that succcess message is displayed to user
+    })
   })
+});
+
+Then('this movie is saved to the database', () => {
+  cy.log('end of test')
+  });
 
 Then('I cancel submission', () => {
-  GlobalNavigation.cancelButton;
-},
-);
+  createMovie.cancelButton();
+});
 
 When('I click on list movies button to perform a search', () =>{
-  cy.get(':nth-child(1) > .nav-link').click();
-  cy.wait(1);
-})
+  listMovies.clickListMoviesButton();
+});
 
-When(/^I use data-driven approach$/, (table: DataTable) => {
+When(/^I use data-driven approach to search movie list$/, (table: DataTable) => {
     console.log("I provide below information - display it all");
     var rows = table.hashes();
     _.each(rows, function(row){
      console.log(row.ID[1] + " " + row.Name + " " + row.Rating);
-    cy.get('.rt-tr > :nth-child(1) > input').type(row.ID);
-    cy.get(':nth-child(2) > input').click().type(row.Name);
-    GlobalNavigation.ratingField;
-    })
-})
 
+    listMovies.clickIDField()
+      .type(row.ID)
+      .clear();
+
+    listMovies.clickNameField()
+      .type(row.Name);
+    listMovies.nameFieldResult()
+      .should('contain', row.Name);  // verification step for checking search result appears as expected
+    listMovies.clickNameField()
+      .clear();
+
+    listMovies.clickRatingField()
+      .type(row.Rating);
+    listMovies.ratingFieldResult()
+      .should('contain', row.Rating);  // verification step for checking search result appears as expected
+    listMovies.clickRatingField()
+      .clear();
+  })
+});

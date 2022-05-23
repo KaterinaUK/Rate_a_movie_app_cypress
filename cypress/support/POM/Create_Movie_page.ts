@@ -1,59 +1,87 @@
-export class GlobalNavigation {
-  static cancelButton: any;
-  static ListMoviesButton: any;
-  static createMovieButton: any;
-  static nameFieldType: any;
-  static getUpdateButton: any;
+class CreateMovie 
 
-    static getTimeField()
+{
+  clickCreateMovieButton()
     {
-      return cy.get('[value=""]').log("I will leave it empty");
+      return   cy.get(':nth-child(2) > .nav-link')
+      .should('have.text', 'Create Movie')
+      .click();
     }
 
-    static searchButton()
+  getNameField()
+    {
+      return cy.get('.sc-fzoLsD > :nth-child(3)')
+    }
+  
+  getUpdateNameField()
+    {
+      return cy.get('[value="Interstellar"]')
+    }
+
+  getClearUpdateNameField()
+    {
+      return cy.get('[value=""]')
+    }
+
+  getTimeField()
+    {
+      return cy.get('.sc-fzoLsD > :nth-child(7)')
+    }
+
+  getRatingField()
+    {
+      return cy.get('[type="number"]')
+    }
+  
+  searchButton()
     {
       return cy.get(':nth-child(1) > .nav-link').click();
     }
 
-    static clickUpdateButton()
+  clickUpdateButton()
     {
       return cy.get('.sc-fzoyAV')
       .should('have.text', 'Update Movie')
-      .click();
+      .click()
     }
 
-    static clickAddButton()
+  clickAddButton()
     {
-      return cy.get('.sc-fznyAO')
-      .should('have.text', 'Add Movie')
-      .click();
+      return cy.findByText(/Add Movie/i)
+      .click()
     }
-    cancelButton()
+
+  cancelButton()
       {
         return cy.get('.sc-fznKkj').should('have.text', 'Cancel')
         .click();
       }
 
-    static newMovieButton()
+  newMovieButton()
       {
         return cy.get(':nth-child(2) > .nav-link')
         .click();
       }
 
-    listMoviesButton()
+  listMoviesButton()
       {
         return cy.get(':nth-child(1) > .nav-link').click();
       }
 
-    static ratingTypeField()
+  ratingTypeField()
       {
         return cy.get('[type="number"]').clear().type('7');
       }
 
-    static ratingField()
+  ratingField()
       {
         return cy.get('[type="number"]').type('9');
       }
-      
+
+  clickUpadateButton()
+      {
+        return cy.get(':nth-child(1) > .rt-tr > :nth-child(6) > span > .sc-Axmtr');
+      }
 }
-export default GlobalNavigation
+
+export default CreateMovie;

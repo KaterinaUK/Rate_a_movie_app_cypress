@@ -11,12 +11,14 @@ When('I send a GET request and verify it', () => {
         console.log(res.body);
     });
     })
+    
 And('I store the data from the movie list', () => {
     cy.request({url: '/api/movies'}).then((res) => {
         const id = res.body[0]._id
         return id
         })
     })
+
 When('I delete a movie and verify success response', () => {
     cy.request({
         method: 'DELETE',
