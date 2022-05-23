@@ -1,5 +1,6 @@
 import { Before, Given, And, When, Then, DataTable} from '@badeball/cypress-cucumber-preprocessor';
-import GlobalNavigation from '../../support/POM/Front_End_app_page';
+import GlobalNavigation from '../../support/POM/Create_Movie_page';
+import Navigation from '../../support/POM/List_Movies_page';
 var _ = require('lodash');
 const url = 'http://localhost:3000'
 
@@ -14,8 +15,8 @@ Given('I open the application', () => {
 },
 );
 And('I find a specific movie', () =>{
-  GlobalNavigation.nameFieldType;
-  GlobalNavigation.getUpdateButton;
+  Navigation.nameFieldType;
+  Navigation.getUpdateButton;
 });
 Then('I will update the name', () => {
   GlobalNavigation.ratingTypeField;
@@ -25,8 +26,8 @@ Then('I will update the name', () => {
 And('I click on Create Movie button', () => {
   cy.get(':nth-child(2) > .nav-link')
         .click();
-},
-);
+});
+
 When('I add a movie to the database', () => {
   cy.get('.sc-fzoLsD > :nth-child(3)').type('test1');
   cy.get('[type="number"]').clear().type('7');
@@ -64,7 +65,8 @@ When(/^I use data-driven approach$/, (table: DataTable) => {
      console.log(row.ID[1] + " " + row.Name + " " + row.Rating);
     cy.get('.rt-tr > :nth-child(1) > input').type(row.ID);
     cy.get(':nth-child(2) > input').click().type(row.Name);
-    cy.get(':nth-child(3) > input').click().type('9');
+    GlobalNavigation.ratingField;
+    // cy.get(':nth-child(3) > input').click().type('9');
     })
 })
 
