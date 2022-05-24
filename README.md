@@ -36,5 +36,7 @@ There are a few tools available to help you debug failed tests on CI:
 - If you suspect a test failure might be caused by a graphql api issue you can log every request & response by adding the command `cy.logApiRequests()` to a `Before()` block in your test. Note: this will make the logs very verbose.
 
 ## Video recording of running tests
-https://user-images.githubusercontent.com/68429856/169706267-63ba7bb3-c958-405d-ac83-34c57bef4aa3.mp4
+
+https://user-images.githubusercontent.com/68429856/169979568-bfcb316f-4828-44b6-b086-c59316865433.mp4
+
 
