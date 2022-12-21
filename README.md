@@ -1,5 +1,4 @@
-# Movie App Cypress Tests
-
+# Movie App - Cypress / BDD / TypeScript + API Testing with Cypress
 How to run and develop the Cypress tests on your local machine.
 
 ## Prerequisites
